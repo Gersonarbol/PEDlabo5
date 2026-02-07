@@ -138,7 +138,59 @@ int main() {
 
  // Implementa el switch con las opciones
 
- } while(opcion != 8);
+ switch (opcion) {
+    case 1: {
+        int carnet;
+        char nombre[50];
+        float nota;
+        cout << "Ingrese carnet: ";
+        cin >> carnet;
+        cout << "Ingrese nombre: ";
+        cin.ignore(); // Limpia el buffer para poder usar getline
+        cin.getline(nombre, 50);
+        cout << "Ingrese nota: ";
+        cin >> nota;
+        sistema = insertar(sistema, carnet, nombre, nota); 
+        break;
+    }
+    case 2:
+        cout << "\n--- Lista de Estudiantes (Orden por Carnet) ---\n";
+        mostrarEstudiantes(sistema); 
+        break;
+    case 3: {
+        int carnetBusqueda;
+        cout << "Ingrese el carnet a buscar: ";
+        cin >> carnetBusqueda;
+        buscarEstudiante(sistema, carnetBusqueda);
+        break;
+    }
+    case 4:
+        cout << "\n--- Estudiantes Aprobados ---\n";
+        mostrarAprobados(sistema); 
+        break;
+    case 5:
+        cout << "\n--- Estudiantes Reprobados ---\n";
+        mostrarReprobados(sistema); 
+        break;
+    case 6:
+        mostrarPromedioGeneral(sistema); 
+        break;
+    case 7: {
+        Estudiante* mejor = encontrarMejorNota(sistema); 
+        if (mejor != NULL) {
+            cout << "El mejor estudiante es: " << mejor->nombre << " con nota de: " << mejor->nota << endl;
+        } else {
+            cout << "No hay estudiantes registrados." << endl;
+        }
+        break;
+    }
+    case 8:
+        cout << "Saliendo del sistema..." << endl;
+        break;
+    default:
+        cout << "Opcion no valida. Intente de nuevo." << endl;
+ }
+}while(opcion != 8);
 
- return 0;
+return 0;
 }
